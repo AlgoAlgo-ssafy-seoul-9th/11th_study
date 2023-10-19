@@ -16,7 +16,38 @@
 ### [민웅](./[PCCP%20모의고사%20#1]/1번%20-%20외톨이%20알파벳/민웅.py)
 
 ```py
-
+def solution(input_string):
+    alpha_dict = {}
+    ans = []
+    length = len(input_string)
+    idx = 0
+    while True:
+        if idx == length:
+            break
+        text = input_string[idx]
+        temp = idx+1
+        while True:
+            if temp < length:
+                if input_string[temp] == text:
+                    temp += 1
+                else:
+                    break
+            else:
+                break
+        idx = temp-1
+        
+        if text in alpha_dict.keys():
+            if text not in ans:
+                ans.append(text)
+        else:
+            alpha_dict[text] = 0
+        idx += 1
+    ans = sorted(ans)
+    if ans:
+        answer = ''.join(ans)
+    else:
+        answer = 'N'
+    return answer
 
 ```
 
@@ -77,7 +108,32 @@ def solution(input_string):
 ### [민웅](./[PCCP%20모의고사%20#1]/2번%20-%20체육대회/민웅.py)
 
 ```py
+from itertools import permutations
 
+def solution(ability):
+    global ans
+    answer = 0
+    # 종목 수
+    l = len(ability[0])
+    # 학생 수
+    students = len(ability)
+    temp_lst = []
+    
+    for i in range(students):
+        temp_lst.append(i)
+        
+    perm = permutations(temp_lst, l)
+    
+    for c in perm:
+        score = 0
+        idx = 0
+        for j in range(l):
+            score += ability[c[j]][idx]
+            idx += 1
+        
+        if score > answer:
+            answer = score
+    return answer
 
 ```
 
