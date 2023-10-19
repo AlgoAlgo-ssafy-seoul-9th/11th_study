@@ -167,37 +167,71 @@ def solution(ability):
 
 <br><br>
 
-## [3번 - 유전법칙](https://school.programmers.co.kr/learn/courses/15008/lessons/121685)
+## [4번 - 운영체제](https://school.programmers.co.kr/learn/courses/15008/lessons/121685)
 
 <details>
 <summary>접기/펼치기</summary>
 <div markdown="1">
 
-### [민웅](./[PCCP%20모의고사%20#1]/2번%20-%20체육대회/민웅.py)
+### [민웅](./[PCCP%20모의고사%20#1]/4번%20-%20운영체제/민웅.py)
+
+```py
+import heapq
+from collections import deque
+
+
+def solution(program):
+    answer = [0]*11
+    # [점수, 호출시간, 실행시간]
+
+    program.sort(key=lambda x: [x[1], x[0]])
+
+    q = deque(program)
+    t = 0
+    hq = []
+    while True:
+        # 프로그램도 다 호출했고, 실행도 끝났으면 종료
+        if not hq and not q:
+            break
+        # 이전 프로그램 실행종료시간 전까지 호출된 프로그램 다 넣기(우선순위 기준으로 정렬하고 heapq로)
+        while q and q[0][1] <= t:
+            p = q.popleft()
+            heapq.heappush(hq, (p[0], p))
+
+        if hq:
+            # 우선순위 제일 높은거로 실행하고 종료
+            p = heapq.heappop(hq)[1]
+            # 시간 계산
+            wait_time = t - p[1]
+            answer[p[0]] += wait_time
+            t += p[2]
+        else:
+            t = q[0][1]
+            
+    answer[0] = t
+    return answer
+
+```
+
+### [병국](./[PCCP%20모의고사%20#1]/4번%20-%20운영체제/병국.py)
 
 ```py
 
 ```
 
-### [병국](./[PCCP%20모의고사%20#1]/2번%20-%20체육대회/병국.py)
+### [상미](./[PCCP%20모의고사%20#1]/4번%20-%20운영체제/상미.py)
 
 ```py
 
 ```
 
-### [상미](./[PCCP%20모의고사%20#1]/2번%20-%20체육대회/상미.py)
+### [서희](./[PCCP%20모의고사%20#1]/4번%20-%20운영체제/서희.py)
 
 ```py
 
 ```
 
-### [서희](./[PCCP%20모의고사%20#1]/2번%20-%20체육대회/서희.py)
-
-```py
-
-```
-
-### [성구](./[PCCP%20모의고사%20#1]/2번%20-%20체육대회/성구.py)
+### [성구](./[PCCP%20모의고사%20#1]/4번%20-%20운영체제/성구.py)
 
 ```py
 
