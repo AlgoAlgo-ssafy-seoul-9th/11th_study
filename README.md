@@ -285,8 +285,36 @@ def solution(program):
 ## [민웅](./IF문%20좀%20대신%20써줘/민웅.py)
 
 ```py
+# 19637_IF문 좀 대신써줘_please write `if` for me
+import sys
+input = sys.stdin.readline
 
+def bs(score, power):
+    left, right = 0, len(score) - 1
+    while left <= right:
+        mid = (left + right) // 2
+        if score[mid] >= power:
+            right = mid - 1
+        else:
+            left = mid + 1
+    return left
 
+N, M = map(int, input().split())
+title = []
+score = []
+
+for _ in range(N):
+    t, s = input().split()
+    if score and score[-1] == s:
+        continue
+    else:
+        title.append(t)
+        score.append(int(s))
+
+for _ in range(M):
+    power = int(input())
+    idx = bs(score, power)
+    print(title[idx])
 ```
 
 ## [병국](./IF문%20좀%20대신%20써줘/병국.py)
